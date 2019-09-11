@@ -41,7 +41,30 @@ class Market
     inventory = Hash.new(0)
     @vendors.each do |vendor|
       inventory.merge!(vendor.inventory) {|key, oldval, newval| oldval + newval}
+
     end
     inventory
   end
+
+  def sell(type, count)
+    @vendors.each do |vendor|
+      # require 'pry';binding.pry
+      vendor.inventory.each do |name, total|
+        if name == type && total <= count
+        true
+        end
+      end
+    end
+
+  end
+
+  # def sell(type, count)
+  #   @vendors.each do |vendor|
+  #     if vendor.inventory.keys.inludes? type && vendor.inventory[type] <= count
+  #       true
+  #     end
+  #   end
+  # end
+
+
 end
