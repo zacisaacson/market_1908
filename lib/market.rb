@@ -29,10 +29,19 @@ class Market
     vendor_with
   end
 
+  def sorted_item_list
+    type = []
+    @vendors.each do |vendor|
+      type << vendor.inventory.keys
+    end
+    type.flatten.uniq.sort
+  end
 
-
-
-
-
-
+  def total_inventory
+    inventory = Hash.new(0)
+    @vendors.each do |vendor|
+      inventory.merge!(vendor.inventory) {|key, oldval, newval| oldval + newval}
+    end
+    inventory
+  end
 end
